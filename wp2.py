@@ -21,12 +21,18 @@ def get_input():
         
 
 def get_path(original_text, encrypted_text):
-    directory = "."
+    try:
+        directory = "."
 
-    original_file = Path(directory) / original_text
-    encrypted_file = Path(directory) / encrypted_text
+        original_file = Path(directory) / original_text
+        encrypted_file = Path(directory) / encrypted_text
 
-    return original_file, encrypted_file
+        original_file.touch()
+        encrypted_file.touch()
+
+        return original_file, encrypted_file
+    except:
+        print("FIXME")
 
 def main():
     try:
@@ -40,14 +46,11 @@ def main():
                 for line in file:
                     print(line.strip())
             
-        """elif command == "-d":
-            decrypt_message(encrypted_file, key)
-            read = write_to_encrypted_file(encrypted_file, original_file)
+        elif command == "-d":
+            read = decrypt_message(original_file, encrypted_file, key)
         
         else:
             print("Error retrieving command. Please try again")
-
-        encryption = write_to_encrypted_file(original_text, encrypted_text)"""
 
     except Exception as e:
         print(e)

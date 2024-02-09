@@ -24,5 +24,5 @@ def encrypt_message(original_file, encrypted_file, key):
     except Exception as e:
         print(e)    
 
-def decrypt_message(encrypted_file, key):
+def decrypt_message(original_file, encrypted_file, key):
     pass
