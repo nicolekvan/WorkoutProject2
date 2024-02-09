@@ -1,21 +1,24 @@
 import sys
 from pathlib import Path
+from encrypt import *
+from check_key import *
+
+# python3 wp2.py -e originaltext.txt encryptedtext.txt 11
 
 def get_input():
-    while True:
-        if len(sys.argv) != 6:
-            print("Error: Please enter in the proper format | python3 wp2.py command file.txt file.txt key")
-            continue
-        elif len(sys.argv) == 6:
-            command = sys.argv[1]
-            original_text = sys.argv[2]
-            encrypted_text = sys.argv[3]
-            key = sys.arv[4]
+    if len(sys.argv) != 5:
+        print("Error: Please enter in the proper format | python3 wp2.py command file.txt file.txt key")
 
-            return command, original_text, encrypted_text, key
-        else:
-            print("Error: Please enter in the proper format | python3 wp2.py command file.txt file.txt key")
-            continue
+    elif len(sys.argv) == 5:
+        command = sys.argv[1]
+        original_text = sys.argv[2]
+        encrypted_text = sys.argv[3]
+        key = int(sys.argv[4])
+
+        return command, original_text, encrypted_text, key
+    else:
+        print("Error: Please enter in the proper format | python3 wp2.py command file.txt file.txt key")
+        
 
 def get_path(original_text, encrypted_text):
     directory = "."
@@ -25,44 +28,27 @@ def get_path(original_text, encrypted_text):
 
     return original_file, encrypted_file
 
-def encrypt_message(original_file, key):
-    pass
-
-def decrypt_message(encrypted_file, key):
-    pass
-
-def write_to_encrypted_file(original_text, encrypted_text):
-    try:
-        with open(original_text, "r") as source:
-            content = source.readlines()
-
-        with open(encrypted_text, "w") as encryption:
-            encryption.write(FIXME)
-
-        return encrypted_text
-    except FileNotFoundError as e:
-        print(f"{e}")
-
 def main():
     try:
         command, original_text, encrypted_text, key = get_input()
         original_file, encrypted_file = get_path(original_text, encrypted_text)
 
         if command == "-e":
-            encrypt_message(original_file, key)
-            write_to_encrypted_file(original_file, encrypted_file)
-            pass
-        elif command == "-d":
+            read = encrypt_message(original_file, encrypted_file, key)
+
+            with open(read, "r") as file:
+                for line in file:
+                    print(line.strip())
+            
+        """elif command == "-d":
             decrypt_message(encrypted_file, key)
-            write_to_encrypted_file(encrypted_file, original_file)
+            read = write_to_encrypted_file(encrypted_file, original_file)
+        
+        else:
+            print("Error retrieving command. Please try again")
 
-            pass
+        encryption = write_to_encrypted_file(original_text, encrypted_text)"""
 
-        encryption = write_to_encrypted_file(original_text, encrypted_text)
-
-        with open(encryption, "r") as file:
-            for line in file:
-                print(line.strip())
     except Exception as e:
         print(e)
 
