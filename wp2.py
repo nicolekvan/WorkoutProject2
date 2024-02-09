@@ -50,9 +50,12 @@ def main():
 
         if command == "-e":
             encrypt_message(original_file, key)
+            write_to_encrypted_file(original_file, encrypted_file)
             pass
         elif command == "-d":
             decrypt_message(encrypted_file, key)
+            write_to_encrypted_file(encrypted_file, original_file)
+
             pass
 
         encryption = write_to_encrypted_file(original_text, encrypted_text)
@@ -60,9 +63,8 @@ def main():
         with open(encryption, "r") as file:
             for line in file:
                 print(line.strip())
-    except:
-        FIXME:
-        pass
+    except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
     main()
