@@ -48,6 +48,10 @@ def main():
             
         elif command == "-d":
             read = decrypt_message(original_file, encrypted_file, key)
+
+            with open(read, "r") as file:
+                for line in file:
+                    print(line.strip())
         
         else:
             print("Error retrieving command. Please try again")
