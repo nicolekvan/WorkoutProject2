@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from encrypt import *
+from WorkoutProject2.encrypt import *
 from check_key import *
 
 # python3 wp2.py -e originaltext.txt encryptedtext.txt 11
